@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .calculator-container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 2px solid rgb(111, 111, 178);
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            background-color: rgb(111, 111, 178);
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        input[type="text"],
+        select {
+            width: 95%;
+            padding: 8px;
+            margin-bottom: 7px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            margin-top: 7px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+            background-color: rgb(111, 111, 178);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: rgb(91, 91, 158);
+        }
+        
+        .reset-btn {
+            background-color: #ccc;
+            color: black;
+        }
+        
+        .reset-btn:hover {
+            background-color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator-container">
+        <form action="{% url 'operation' %}" method="POST">
+            {% csrf_token %}
+            <h1>Calculator</h1>
+
+            <!-- First Number Input -->
+            <label for="firstNumber">First number</label>
+            <input type="text" name="num1" id="firstNumber">
+
+            <!-- Second Number Input -->
+            <label for="secondNumber">Second number</label>
+            <input type="text" name="num2" id="secondNumber">
+
+            <!-- Operation Selection -->
+            <label for="operation">Operation</label>
+            <select name="operation" id="operation">
+                <option value="" disabled selected>Select an operation</option>
+                <option value="+">Addition (+)</option>
+                <option value="-">Subtraction (-)</option>
+                <option value="*">Multiplication (x)</option>
+                <option value="/">Division (/)</option>
+            </select>
+
+            <!-- Result Button -->
+            <button type="submit">Result</button>
+
+            <!-- Result Input -->
+            <input type="text" placeholder="Result" readonly value="{{ result }}">
+
+            <!-- Reset Button -->
+            <button type="submit" name="reset" value="reset" class="reset-btn">Reset</button>
+        </form>
+    </div>
+</body>
+
+</html>
